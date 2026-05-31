@@ -1,49 +1,542 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --plum: #361F36;
+  --stone: #F2F2EE;
+  --eggplant: #857479;
+  --berry: #C8A882;
+  --grape: #8E7B6E;
+  --heather: #E8E4DF;
+  --paper: #FFFFFF;
+  --green: #4A7C59;
+  --green-light: #EAF2EC;
+  --yellow: #C4922A;
+  --yellow-light: #FDF4E3;
+  --red: #9B3A3A;
+  --red-light: #FAEAEA;
+  --line: rgba(54, 31, 54, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Karla', sans-serif;
+  background-color: var(--stone);
+  color: var(--plum);
+  min-height: 100vh;
 }
 
-* {
-  box-sizing: border-box;
+/* ── NAV ── */
+
+.pc-nav {
+  background: var(--plum);
   padding: 0;
-  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(54, 31, 54, 0.3);
 }
 
-a {
-  color: inherit;
+.pc-nav-brand {
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.pc-nav-logo {
+  height: 28px;
+  width: auto;
+}
+
+.pc-nav-title {
+  font-family: 'Fjalla One', sans-serif;
+  color: var(--stone);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pc-tier-tabs {
+  display: flex;
+  height: 100%;
+}
+
+.pc-tier-tab {
+  padding: 22px 28px;
+  cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(242, 242, 238, 0.5);
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pc-tier-tab:hover {
+  color: var(--stone);
+}
+
+.pc-tier-tab.active {
+  color: var(--stone);
+  border-bottom-color: var(--berry);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── TIER HEADER BANNERS ── */
+
+.pc-tier-header {
+  padding: 52px 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pc-tier-header.launch {
+  background: linear-gradient(135deg, #2a1629 0%, #361F36 60%, #4a2d4a 100%);
+}
+.pc-tier-header.grow {
+  background: linear-gradient(135deg, #1e2d26 0%, #2a3d32 60%, #3d5445 100%);
+}
+.pc-tier-header.scale {
+  background: linear-gradient(135deg, #1a1f35 0%, #252d4a 60%, #343d5e 100%);
+}
+
+.pc-tier-header::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pc-tier-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 40%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pc-tier-badge {
+  display: inline-block;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.pc-tier-name {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 48px;
+  letter-spacing: -0.5px;
+  color: var(--stone);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pc-tier-range {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: rgba(242, 242, 238, 0.6);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.pc-tier-focus {
+  font-size: 13px;
+  color: rgba(242, 242, 238, 0.55);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.pc-tier-pillars {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pc-pillar-chip {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── LEGEND BAR ── */
+
+.pc-legend-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 48px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.pc-legend-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-right: 4px;
+}
+
+.pc-legend-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--plum);
+}
+
+.pc-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-green  { background: var(--green); }
+.dot-yellow { background: var(--yellow); }
+.dot-red    { background: var(--red); }
+
+/* ── CHART BODY ── */
+
+.pc-chart-body {
+  padding: 32px 48px 48px;
+}
+
+.pc-chart-section-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(54, 31, 54, 0.1);
+}
+
+/* ── ACTIVITY CARDS ── */
+
+.pc-activity-card {
+  background: var(--paper);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.pc-activity-card:hover {
+  box-shadow: 0 4px 20px rgba(54, 31, 54, 0.08);
+}
+
+.pc-activity-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pc-activity-number {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 11px;
+  color: var(--eggplant);
+  width: 20px;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+.pc-activity-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pc-activity-name {
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--plum);
+  margin-bottom: 2px;
+}
+
+.pc-activity-subtitle {
+  font-size: 12px;
+  color: var(--eggplant);
+  font-weight: 400;
+}
+
+.pc-rating-pills {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.pc-pill {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  background: var(--heather);
+  line-height: 1;
+}
+
+.pc-pill:hover {
+  transform: scale(1.12);
+}
+
+.pc-pill.selected-green  { background: var(--green-light); border-color: var(--green); }
+.pc-pill.selected-yellow { background: var(--yellow-light); border-color: var(--yellow); }
+.pc-pill.selected-red    { background: var(--red-light); border-color: var(--red); }
+
+/* ── EXPANDED DETAIL ── */
+
+.pc-activity-detail {
+  border-top: 1px solid rgba(54, 31, 54, 0.07);
+}
+
+.pc-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+
+.pc-detail-col {
+  padding: 16px 20px;
+  border-right: 1px solid rgba(54, 31, 54, 0.07);
+}
+
+.pc-detail-col:last-child {
+  border-right: none;
+}
+
+.pc-detail-col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pc-detail-col.red-col    { background: var(--red-light); }
+.pc-detail-col.yellow-col { background: var(--yellow-light); }
+.pc-detail-col.green-col  { background: var(--green-light); }
+
+.pc-col-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pc-detail-col.red-col .pc-detail-col-header    { color: var(--red); }
+.pc-detail-col.yellow-col .pc-detail-col-header { color: var(--yellow); }
+.pc-detail-col.green-col .pc-detail-col-header  { color: var(--green); }
+
+.pc-detail-text {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--plum);
+}
+
+/* ── SUMMARY BAR ── */
+
+.pc-summary-bar {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-top: 32px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+}
+
+.pc-summary-title {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-bottom: 16px;
+}
+
+.pc-summary-counts {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.pc-summary-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pc-count-num {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 26px;
+}
+
+.pc-count-num.green  { color: var(--green); }
+.pc-count-num.yellow { color: var(--yellow); }
+.pc-count-num.red    { color: var(--red); }
+
+.pc-progress-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--heather);
+  overflow: hidden;
+  display: flex;
+}
+
+.pc-progress-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  border-radius: 0;
+}
+
+.fill-green  { background: var(--green); }
+.fill-yellow { background: var(--yellow); }
+.fill-red    { background: var(--red); }
+
+.pc-summary-cta {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--eggplant);
+  font-style: italic;
+}
+
+/* ── NOTES ── */
+
+.pc-notes-area {
+  background: var(--paper);
+  border-radius: 10px;
+  margin-top: 16px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+  padding: 20px 24px;
+}
+
+.pc-notes-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-bottom: 8px;
+}
+
+.pc-notes-input {
+  width: 100%;
+  min-height: 60px;
+  border: none;
+  outline: none;
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  color: var(--plum);
+  resize: none;
+  background: transparent;
+  line-height: 1.6;
+}
+
+.pc-notes-input::placeholder {
+  color: rgba(133, 116, 121, 0.4);
+}
+
+/* ── ACTIONS ROW ── */
+
+.pc-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 48px 32px;
+}
+
+.pc-reset-btn {
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  background: none;
+  border: 1px solid rgba(133, 116, 121, 0.3);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pc-reset-btn:hover {
+  background: var(--heather);
+  color: var(--plum);
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 700px) {
+  .pc-tier-tab { padding: 20px 14px; font-size: 10px; }
+  .pc-tier-name { font-size: 34px; }
+  .pc-tier-header { padding: 36px 24px 28px; }
+  .pc-chart-body { padding: 24px 20px 40px; }
+  .pc-legend-bar { padding: 14px 20px; }
+  .pc-detail-grid { grid-template-columns: 1fr; }
+  .pc-detail-col { border-right: none; border-bottom: 1px solid rgba(54, 31, 54, 0.07); }
+  .pc-detail-col:last-child { border-bottom: none; }
+  .pc-actions-row { padding: 0 20px 24px; }
+  .pc-nav-brand { padding: 16px 20px; }
+  .pc-summary-counts { flex-wrap: wrap; gap: 12px; }
+  .pc-nav-title { display: none; }
 }

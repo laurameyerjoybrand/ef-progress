@@ -378,7 +378,7 @@ export default function ProgressCharts() {
       <nav className="pc-nav">
         <div className="pc-nav-brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-white.png" alt="Expert Freedom" className="pc-nav-logo" />
+          <img src="/monogram-white.png" alt="Expert Freedom" className="pc-nav-logo" />
           <span className="pc-nav-title">Expert Freedom</span>
         </div>
         <div className="pc-tier-tabs">

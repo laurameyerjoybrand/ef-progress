@@ -90,7 +90,7 @@ const TIERS: TierData[] = [
       {
         id: 5,
         name: "Booking Conversations",
-        subtitle: "Holding discovery or consultative calls consistently",
+        subtitle: "Holding a minimum of five discovery or consultative calls a month",
         detail: {
           red: "Haven't had any calls yet or haven't asked anyone to meet.",
           yellow: "Had a few but it feels scattered. Not a consistent cadence.",
@@ -100,7 +100,7 @@ const TIERS: TierData[] = [
       {
         id: 6,
         name: "Making the Offer",
-        subtitle: "Clearly asking for the business at the end of every conversation",
+        subtitle: "Clearly asking for the business at the end of every conversation or message following the collaborative close process",
         detail: {
           red: "Never get to the ask. Conversations end without a clear next step.",
           yellow: "Sometimes make the offer but back off when I feel resistance.",

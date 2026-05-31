@@ -526,12 +526,15 @@ export default function ProgressCharts() {
           </div>
 
           {/* Notes */}
-          {report.notes && (
-            <div className="pc-report-section">
-              <div className="pc-report-section-label">My Focus This Week</div>
-              <div className="pc-report-notes">{report.notes}</div>
-            </div>
-          )}
+          <div className="pc-report-section">
+            <div className="pc-report-section-label">My Focus This Week</div>
+            <textarea
+              className="pc-notes-input pc-report-notes-input"
+              placeholder="Based on your report, what's the one red or yellow you're committing to move before your next coaching call?"
+              value={notes[activeTier]}
+              onChange={(e) => handleNoteChange(activeTier, e.target.value)}
+            />
+          </div>
 
           {/* Email form */}
           <div className="pc-email-section">
@@ -735,16 +738,6 @@ export default function ProgressCharts() {
                 )}
               </div>
 
-              {/* Notes */}
-              <div className="pc-notes-area">
-                <div className="pc-notes-label">My Focus This Week</div>
-                <textarea
-                  className="pc-notes-input"
-                  placeholder="What's the one red or yellow I'm committing to move this week?"
-                  value={notes[tier.id]}
-                  onChange={(e) => handleNoteChange(tier.id, e.target.value)}
-                />
-              </div>
             </div>
 
             {/* Reset */}

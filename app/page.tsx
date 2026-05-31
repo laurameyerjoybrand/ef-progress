@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import {
+  COACHING,
+  getScorePattern,
+  getFirstPriorityActivity,
+  type TierId,
+  type RatingColor,
+} from "./lib/coaching-content";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TierId = "launch" | "grow" | "scale";
-type RatingColor = "red" | "yellow" | "green";
+type AppMode = "chart" | "report";
 type TierRatings = Record<number, RatingColor>;
 type AllRatings = Record<TierId, TierRatings>;
 type AllNotes = Record<TierId, string>;
@@ -100,7 +106,8 @@ const TIERS: TierData[] = [
       {
         id: 6,
         name: "Making the Offer",
-        subtitle: "Clearly asking for the business at the end of every conversation or message following the collaborative close process",
+        subtitle:
+          "Clearly asking for the business at the end of every conversation or message following the collaborative close process",
         detail: {
           red: "Never get to the ask. Conversations end without a clear next step.",
           yellow: "Sometimes make the offer but back off when I feel resistance.",
@@ -270,17 +277,15 @@ const STORAGE_KEY_NOTES = "ef-progress-notes";
 
 export default function ProgressCharts() {
   const [activeTier, setActiveTier] = useState<TierId>("launch");
-  const [ratings, setRatings] = useState<AllRatings>({
-    launch: {},
-    grow: {},
-    scale: {},
-  });
-  const [notes, setNotes] = useState<AllNotes>({
-    launch: "",
-    grow: "",
-    scale: "",
-  });
+  const [appMode, setAppMode] = useState<AppMode>("chart");
+  const [ratings, setRatings] = useState<AllRatings>({ launch: {}, grow: {}, scale: {} });
+  const [notes, setNotes] = useState<AllNotes>({ launch: "", grow: "", scale: "" });
   const [openDetails, setOpenDetails] = useState<OpenDetails>({});
+
+  // Email form state
+  const [emailName, setEmailName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -294,33 +299,19 @@ export default function ProgressCharts() {
     }
   }, []);
 
-  // Persist ratings to localStorage
   const saveRatings = useCallback((next: AllRatings) => {
     setRatings(next);
-    try {
-      localStorage.setItem(STORAGE_KEY_RATINGS, JSON.stringify(next));
-    } catch {
-      // ignore storage errors
-    }
+    try { localStorage.setItem(STORAGE_KEY_RATINGS, JSON.stringify(next)); } catch { /* ignore */ }
   }, []);
 
-  // Persist notes to localStorage
   const saveNotes = useCallback((next: AllNotes) => {
     setNotes(next);
-    try {
-      localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(next));
-    } catch {
-      // ignore storage errors
-    }
+    try { localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(next)); } catch { /* ignore */ }
   }, []);
 
   const handleRate = (e: React.MouseEvent, tier: TierId, actId: number, color: RatingColor) => {
     e.stopPropagation();
-    const next: AllRatings = {
-      ...ratings,
-      [tier]: { ...ratings[tier], [actId]: color },
-    };
-    saveRatings(next);
+    saveRatings({ ...ratings, [tier]: { ...ratings[tier], [actId]: color } });
   };
 
   const handleToggleDetail = (key: string) => {
@@ -328,13 +319,24 @@ export default function ProgressCharts() {
   };
 
   const handleReset = (tier: TierId) => {
-    const next: AllRatings = { ...ratings, [tier]: {} };
-    saveRatings(next);
+    saveRatings({ ...ratings, [tier]: {} });
   };
 
   const handleNoteChange = (tier: TierId, value: string) => {
-    const next: AllNotes = { ...notes, [tier]: value };
-    saveNotes(next);
+    saveNotes({ ...notes, [tier]: value });
+  };
+
+  const handleGetReport = () => {
+    setEmailStatus("idle");
+    setEmailName("");
+    setEmailAddress("");
+    setAppMode("report");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBackToChart = () => {
+    setAppMode("chart");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const getCta = (tier: TierId): string => {
@@ -343,7 +345,6 @@ export default function ProgressCharts() {
     const y = vals.filter((v) => v === "yellow").length;
     const r = vals.filter((v) => v === "red").length;
     const rated = g + y + r;
-
     if (rated === 0) return CTAS.none;
     if (rated < TOTAL) return `${rated} of ${TOTAL} rated. Keep going.`;
     if (g === TOTAL) return CTAS.all_green;
@@ -367,10 +368,220 @@ export default function ProgressCharts() {
   };
 
   const getPillClass = (tier: TierId, actId: number, color: RatingColor): string => {
-    const selected = ratings[tier][actId] === color;
-    if (!selected) return "pc-pill";
-    return `pc-pill selected-${color}`;
+    return ratings[tier][actId] === color ? `pc-pill selected-${color}` : "pc-pill";
   };
+
+  const allRated = (tier: TierId) => Object.keys(ratings[tier]).length === TOTAL;
+
+  // Build report data for current tier
+  const buildReportData = () => {
+    const tier = activeTier;
+    const tierObj = TIERS.find((t) => t.id === tier)!;
+    const coaching = COACHING[tier];
+    const pattern = getScorePattern(ratings[tier]);
+    const overallMessage =
+      pattern !== "incomplete" ? coaching.overall[pattern] : "";
+
+    const activityNotes = tierObj.activities
+      .filter((act) => ratings[tier][act.id] !== "green")
+      .map((act) => ({
+        activityName: act.name,
+        rating: ratings[tier][act.id] ?? "red",
+        note: coaching.activities[act.id]?.[ratings[tier][act.id] as "red" | "yellow"] ?? "",
+      }));
+
+    const greenActivities = tierObj.activities.filter(
+      (act) => ratings[tier][act.id] === "green"
+    );
+
+    const priorityActId = getFirstPriorityActivity(ratings[tier]);
+    const priorityActName = priorityActId
+      ? tierObj.activities.find((a) => a.id === priorityActId)?.name
+      : null;
+
+    const oneMove = priorityActName
+      ? `Based on your ratings, your one move before your next coaching call is: ${priorityActName}. Bring your progress on this one thing to your next Momentum Call.`
+      : "You're firing on all cylinders across every activity. Bring this chart to your next Momentum Call and let's talk about what's next.";
+
+    return {
+      tier,
+      tierName: `${tierObj.badge} · ${tierObj.name}`,
+      overallMessage,
+      activityNotes,
+      greenActivities,
+      oneMove,
+      notes: notes[tier],
+    };
+  };
+
+  const handleSendEmail = async () => {
+    if (!emailName.trim() || !emailAddress.trim()) return;
+    setEmailStatus("sending");
+
+    const report = buildReportData();
+    const tierObj = TIERS.find((t) => t.id === activeTier)!;
+
+    try {
+      const res = await fetch("/api/send-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentName: emailName.trim(),
+          studentEmail: emailAddress.trim(),
+          tier: activeTier,
+          tierName: tierObj.name,
+          ratings: ratings[activeTier],
+          notes: notes[activeTier],
+          overallMessage: report.overallMessage,
+          activityNotes: report.activityNotes,
+          oneMove: report.oneMove,
+        }),
+      });
+
+      if (!res.ok) throw new Error("send failed");
+      setEmailStatus("sent");
+    } catch {
+      setEmailStatus("error");
+    }
+  };
+
+  // ── Report View ─────────────────────────────────────────────────────────────
+
+  if (appMode === "report") {
+    const report = buildReportData();
+    const tierObj = TIERS.find((t) => t.id === activeTier)!;
+
+    return (
+      <div>
+        {/* Nav */}
+        <nav className="pc-nav">
+          <div className="pc-nav-brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/monogram-white.png" alt="Expert Freedom" className="pc-nav-logo" />
+            <span className="pc-nav-title">Expert Freedom</span>
+          </div>
+          <div className="pc-tier-tabs">
+            <button className="pc-tier-tab active" type="button">
+              {tierObj.badge} · {tierObj.name.charAt(0) + tierObj.name.slice(1).toLowerCase()} · Report
+            </button>
+          </div>
+        </nav>
+
+        <div className={`pc-tier-header ${tierObj.headerClass}`}>
+          <div className="pc-tier-badge">{tierObj.badge} · Progress Report</div>
+          <div className="pc-tier-name">{tierObj.name}</div>
+          <div className="pc-tier-range">{tierObj.range}</div>
+        </div>
+
+        <div className="pc-report-body">
+          {/* Back link */}
+          <button className="pc-back-link" onClick={handleBackToChart} type="button">
+            ← Back to my ratings
+          </button>
+
+          {/* Overall message */}
+          <div className="pc-report-section">
+            <div className="pc-report-section-label">Your Overall Assessment</div>
+            <p className="pc-report-overall">{report.overallMessage}</p>
+          </div>
+
+          {/* Green wins */}
+          {report.greenActivities.length > 0 && (
+            <div className="pc-report-section">
+              <div className="pc-report-section-label">What&apos;s Working</div>
+              <div className="pc-green-wins">
+                {report.greenActivities.map((act) => (
+                  <div key={act.id} className="pc-green-win-item">
+                    <span className="pc-green-check">✓</span>
+                    <span>{act.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Coaching notes */}
+          {report.activityNotes.length > 0 && (
+            <div className="pc-report-section">
+              <div className="pc-report-section-label">Your Coaching Notes</div>
+              {report.activityNotes.map((note) => (
+                <div key={note.activityName} className={`pc-coaching-card ${note.rating}-card`}>
+                  <div className="pc-coaching-card-label">
+                    <div className={`pc-coaching-dot dot-${note.rating}`} />
+                    {note.rating === "red" ? "Needs Attention" : "In Progress"}
+                  </div>
+                  <div className="pc-coaching-card-name">{note.activityName}</div>
+                  <p className="pc-coaching-card-note">{note.note}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* One Move */}
+          <div className="pc-report-section">
+            <div className="pc-one-move-card">
+              <div className="pc-one-move-label">Your One Move</div>
+              <p className="pc-one-move-text">{report.oneMove}</p>
+            </div>
+          </div>
+
+          {/* Notes */}
+          {report.notes && (
+            <div className="pc-report-section">
+              <div className="pc-report-section-label">My Focus This Week</div>
+              <div className="pc-report-notes">{report.notes}</div>
+            </div>
+          )}
+
+          {/* Email form */}
+          <div className="pc-email-section">
+            <div className="pc-email-section-label">Email This Report to Yourself</div>
+            <p className="pc-email-section-sub">
+              Keep a copy in your inbox to reference before your next coaching call.
+            </p>
+
+            {emailStatus === "sent" ? (
+              <div className="pc-email-success">
+                ✓ Sent! Check your inbox.
+              </div>
+            ) : (
+              <div className="pc-email-form">
+                <input
+                  className="pc-email-input"
+                  type="text"
+                  placeholder="Your name"
+                  value={emailName}
+                  onChange={(e) => setEmailName(e.target.value)}
+                  disabled={emailStatus === "sending"}
+                />
+                <input
+                  className="pc-email-input"
+                  type="email"
+                  placeholder="Your email address"
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  disabled={emailStatus === "sending"}
+                />
+                <button
+                  className={`pc-email-btn${!emailName.trim() || !emailAddress.trim() || emailStatus === "sending" ? " disabled" : ""}`}
+                  onClick={handleSendEmail}
+                  disabled={!emailName.trim() || !emailAddress.trim() || emailStatus === "sending"}
+                  type="button"
+                >
+                  {emailStatus === "sending" ? "Sending…" : "Email My Report"}
+                </button>
+                {emailStatus === "error" && (
+                  <p className="pc-email-error">Something went wrong. Please try again.</p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Chart View ──────────────────────────────────────────────────────────────
 
   return (
     <div>
@@ -386,7 +597,7 @@ export default function ProgressCharts() {
             <button
               key={tier.id}
               className={`pc-tier-tab${activeTier === tier.id ? " active" : ""}`}
-              onClick={() => setActiveTier(tier.id)}
+              onClick={() => { setActiveTier(tier.id); setAppMode("chart"); }}
               type="button"
             >
               {tier.badge} · {tier.name.charAt(0) + tier.name.slice(1).toLowerCase()}
@@ -399,6 +610,7 @@ export default function ProgressCharts() {
       {TIERS.map((tier) => {
         const counts = getColorCounts(tier.id);
         const isActive = activeTier === tier.id;
+        const canGetReport = allRated(tier.id);
 
         return (
           <div key={tier.id} style={{ display: isActive ? "block" : "none" }}>
@@ -447,9 +659,7 @@ export default function ProgressCharts() {
                       className="pc-activity-header"
                       onClick={() => handleToggleDetail(detailKey)}
                     >
-                      <div className="pc-activity-number">
-                        {String(act.id).padStart(2, "0")}
-                      </div>
+                      <div className="pc-activity-number">{String(act.id).padStart(2, "0")}</div>
                       <div className="pc-activity-info">
                         <div className="pc-activity-name">{act.name}</div>
                         <div className="pc-activity-subtitle">{act.subtitle}</div>
@@ -461,7 +671,6 @@ export default function ProgressCharts() {
                             className={getPillClass(tier.id, act.id, color)}
                             onClick={(e) => handleRate(e, tier.id, act.id, color)}
                             type="button"
-                            title={color.charAt(0).toUpperCase() + color.slice(1)}
                             aria-label={`Rate ${act.name} as ${color}`}
                           >
                             {color === "red" ? "🔴" : color === "yellow" ? "🟡" : "🟢"}
@@ -504,20 +713,26 @@ export default function ProgressCharts() {
                   </div>
                 </div>
                 <div className="pc-progress-track">
-                  <div
-                    className="pc-progress-fill fill-green"
-                    style={{ width: `${counts.gW}%` }}
-                  />
-                  <div
-                    className="pc-progress-fill fill-yellow"
-                    style={{ width: `${counts.yW}%` }}
-                  />
-                  <div
-                    className="pc-progress-fill fill-red"
-                    style={{ width: `${counts.rW}%` }}
-                  />
+                  <div className="pc-progress-fill fill-green" style={{ width: `${counts.gW}%` }} />
+                  <div className="pc-progress-fill fill-yellow" style={{ width: `${counts.yW}%` }} />
+                  <div className="pc-progress-fill fill-red" style={{ width: `${counts.rW}%` }} />
                 </div>
                 <div className="pc-summary-cta">{getCta(tier.id)}</div>
+
+                {canGetReport && (
+                  <button
+                    className="pc-get-report-btn"
+                    onClick={handleGetReport}
+                    type="button"
+                  >
+                    Get My Coaching Report →
+                  </button>
+                )}
+                {!canGetReport && (
+                  <p className="pc-report-hint">
+                    Rate all {TOTAL} activities to unlock your coaching report.
+                  </p>
+                )}
               </div>
 
               {/* Notes */}
@@ -534,11 +749,7 @@ export default function ProgressCharts() {
 
             {/* Reset */}
             <div className="pc-actions-row">
-              <button
-                className="pc-reset-btn"
-                onClick={() => handleReset(tier.id)}
-                type="button"
-              >
+              <button className="pc-reset-btn" onClick={() => handleReset(tier.id)} type="button">
                 ↺ Reset Ratings
               </button>
             </div>

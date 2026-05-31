@@ -524,6 +524,264 @@ body {
   color: var(--plum);
 }
 
+/* ── REPORT VIEW ── */
+
+.pc-report-body {
+  padding: 32px 48px 64px;
+  max-width: 760px;
+}
+
+.pc-back-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  padding: 0;
+  margin-bottom: 28px;
+  display: inline-block;
+  transition: color 0.15s;
+}
+
+.pc-back-link:hover { color: var(--plum); }
+
+.pc-report-section {
+  margin-bottom: 32px;
+}
+
+.pc-report-section-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(54, 31, 54, 0.1);
+}
+
+.pc-report-overall {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--plum);
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 20px 24px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+}
+
+.pc-green-wins {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pc-green-win-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green-light);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.pc-green-check {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.pc-coaching-card {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+}
+
+.pc-coaching-card.red-card { border-left: 4px solid var(--red); }
+.pc-coaching-card.yellow-card { border-left: 4px solid var(--yellow); }
+
+.pc-coaching-card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.red-card .pc-coaching-card-label { color: var(--red); }
+.yellow-card .pc-coaching-card-label { color: var(--yellow); }
+
+.pc-coaching-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pc-coaching-card-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--plum);
+  margin-bottom: 8px;
+}
+
+.pc-coaching-card-note {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--plum);
+  margin: 0;
+}
+
+.pc-one-move-card {
+  background: var(--plum);
+  border-radius: 10px;
+  padding: 22px 26px;
+}
+
+.pc-one-move-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(242, 242, 238, 0.6);
+  margin-bottom: 10px;
+}
+
+.pc-one-move-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--stone);
+  margin: 0;
+}
+
+.pc-report-notes {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--plum);
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+}
+
+/* ── EMAIL FORM ── */
+
+.pc-email-section {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 24px 28px;
+  border: 1.5px solid rgba(54, 31, 54, 0.07);
+  margin-top: 8px;
+}
+
+.pc-email-section-label {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--eggplant);
+  margin-bottom: 6px;
+}
+
+.pc-email-section-sub {
+  font-size: 12px;
+  color: var(--eggplant);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.pc-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pc-email-input {
+  width: 100%;
+  padding: 11px 14px;
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  color: var(--plum);
+  background: var(--stone);
+  border: 1.5px solid rgba(54, 31, 54, 0.12);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.pc-email-input:focus { border-color: var(--plum); }
+.pc-email-input::placeholder { color: rgba(133, 116, 121, 0.5); }
+
+.pc-email-btn {
+  padding: 12px 24px;
+  background: var(--plum);
+  color: var(--stone);
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+}
+
+.pc-email-btn:hover { opacity: 0.88; }
+.pc-email-btn.disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pc-email-success {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  padding: 12px 0;
+}
+
+.pc-email-error {
+  font-size: 12px;
+  color: var(--red);
+  margin: 4px 0 0;
+}
+
+/* ── GET REPORT BUTTON ── */
+
+.pc-get-report-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 14px;
+  background: var(--plum);
+  color: var(--stone);
+  font-family: 'Karla', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.pc-get-report-btn:hover { opacity: 0.88; }
+
+.pc-report-hint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--eggplant);
+  font-style: italic;
+  text-align: center;
+}
+
 /* ── RESPONSIVE ── */
 
 @media (max-width: 700px) {

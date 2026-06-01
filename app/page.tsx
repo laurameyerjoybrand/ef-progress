@@ -65,12 +65,12 @@ const TIERS: TierData[] = [
       },
       {
         id: 2,
-        name: "Outreach (50 Minimum)",
-        subtitle: "Network outreach OR 50 new leads via local networking if needed",
+        name: "50 Trackable Conversations",
+        subtitle: "50 total outreach contacts while in Tier 1 — calls, messages, or conversations about your business",
         detail: {
-          red: "Haven't started or under 10 outreach contacts total.",
+          red: "Haven't started or under 10 trackable conversations total.",
           yellow: "Between 10–40 contacts. Moving but stalling before the finish line.",
-          green: "Hit 50+ and actively working my list with follow-ups ongoing.",
+          green: "Hit 50 total trackable conversations and actively working my list with follow-ups.",
         },
       },
       {
@@ -112,6 +112,26 @@ const TIERS: TierData[] = [
           red: "Never get to the ask. Conversations end without a clear next step.",
           yellow: "Sometimes make the offer but back off when I feel resistance.",
           green: "Consistently making the offer and handling objections with confidence.",
+        },
+      },
+      {
+        id: 7,
+        name: "Three Beta Clients, Delivered",
+        subtitle: "Booked three beta clients and delivered using the LEAP method",
+        detail: {
+          red: "Haven't booked any beta clients yet. This is the proof-of-concept step.",
+          yellow: "Have one or two betas but haven't completed full LEAP delivery or hit three yet.",
+          green: "Delivered full LEAP method to three beta clients. Proof of concept complete.",
+        },
+      },
+      {
+        id: 8,
+        name: "Charging Full Price",
+        subtitle: "Charging full price for three additional clients beyond your betas",
+        detail: {
+          red: "Still offering beta pricing or haven't made the transition to full price yet.",
+          yellow: "Charged full price for one or two clients but not consistently.",
+          green: "Charging full price for three additional clients. The transition is made.",
         },
       },
     ],
@@ -260,7 +280,8 @@ const TIERS: TierData[] = [
   },
 ];
 
-const TOTAL = 6;
+const getTierTotal = (tierId: TierId) =>
+  TIERS.find((t) => t.id === tierId)!.activities.length;
 
 const CTAS: Record<string, string> = {
   all_green: "You're firing on all cylinders. Are you ready to move to the next tier?",
@@ -340,20 +361,22 @@ export default function ProgressCharts() {
   };
 
   const getCta = (tier: TierId): string => {
+    const total = getTierTotal(tier);
     const vals = Object.values(ratings[tier]);
     const g = vals.filter((v) => v === "green").length;
     const y = vals.filter((v) => v === "yellow").length;
     const r = vals.filter((v) => v === "red").length;
     const rated = g + y + r;
     if (rated === 0) return CTAS.none;
-    if (rated < TOTAL) return `${rated} of ${TOTAL} rated. Keep going.`;
-    if (g === TOTAL) return CTAS.all_green;
-    if (g >= 4) return CTAS.mostly_green;
-    if (g + y >= 3) return CTAS.mixed;
+    if (rated < total) return `${rated} of ${total} rated. Keep going.`;
+    if (g === total) return CTAS.all_green;
+    if (g >= Math.ceil(total * 0.67)) return CTAS.mostly_green;
+    if (g + y >= Math.ceil(total * 0.5)) return CTAS.mixed;
     return CTAS.mostly_red;
   };
 
   const getColorCounts = (tier: TierId) => {
+    const total = getTierTotal(tier);
     const vals = Object.values(ratings[tier]);
     const g = vals.filter((v) => v === "green").length;
     const y = vals.filter((v) => v === "yellow").length;
@@ -361,9 +384,9 @@ export default function ProgressCharts() {
     const rated = g + y + r;
     return {
       g, y, r,
-      gW: rated ? (g / TOTAL) * 100 : 0,
-      yW: rated ? (y / TOTAL) * 100 : 0,
-      rW: rated ? (r / TOTAL) * 100 : 0,
+      gW: rated ? (g / total) * 100 : 0,
+      yW: rated ? (y / total) * 100 : 0,
+      rW: rated ? (r / total) * 100 : 0,
     };
   };
 
@@ -371,14 +394,15 @@ export default function ProgressCharts() {
     return ratings[tier][actId] === color ? `pc-pill selected-${color}` : "pc-pill";
   };
 
-  const allRated = (tier: TierId) => Object.keys(ratings[tier]).length === TOTAL;
+  const allRated = (tier: TierId) => Object.keys(ratings[tier]).length === getTierTotal(tier);
 
   // Build report data for current tier
   const buildReportData = () => {
     const tier = activeTier;
     const tierObj = TIERS.find((t) => t.id === tier)!;
     const coaching = COACHING[tier];
-    const pattern = getScorePattern(ratings[tier]);
+    const total = tierObj.activities.length;
+    const pattern = getScorePattern(ratings[tier], total);
     const overallMessage =
       pattern !== "incomplete" ? coaching.overall[pattern] : "";
 
@@ -394,7 +418,7 @@ export default function ProgressCharts() {
       (act) => ratings[tier][act.id] === "green"
     );
 
-    const priorityActId = getFirstPriorityActivity(ratings[tier]);
+    const priorityActId = getFirstPriorityActivity(ratings[tier], total);
     const priorityActName = priorityActId
       ? tierObj.activities.find((a) => a.id === priorityActId)?.name
       : null;
@@ -733,7 +757,7 @@ export default function ProgressCharts() {
                 )}
                 {!canGetReport && (
                   <p className="pc-report-hint">
-                    Rate all {TOTAL} activities to unlock your coaching report.
+                    Rate all {tier.activities.length} activities to unlock your coaching report.
                   </p>
                 )}
               </div>

@@ -38,9 +38,9 @@ export const COACHING: Record<TierId, TierCoaching> = {
         yellow: `Changing your offer or questioning yourself is a form of avoiding the market. Lock it for 30 days and lead with it exactly as it is, even if you are not sure if it's "perfect". The market will tell you what needs to change.`,
       },
       2: {
-        red: "Nothing happens until you talk to people. Open your contacts today, identify 10 people you could reach out to this week, and start there. The 30-Day Quick Start has your outreach framework so make sure you use it. The Beta Client Blueprint inside of Fractional Freedom will give you more detail on how this all works.",
+        red: "Nothing happens until you talk to people — and conversations equal cash. Open your contacts today, identify 10 people you could reach out to this week, and start there. Remember: trackable conversations count — calls, messages, even talking with a friend about your new business. The 30-Day Quick Start has your outreach framework so make sure you use it. The Beta Client Blueprint inside of Fractional Freedom will give you more detail on how this all works.",
         yellow:
-          "You're moving but stalling before the finish line. Many people are scared to have conversations, but conversations equal cash. If you're not sure how to move through this fear, bring it to a Momentum Call.",
+          "You're moving but stalling before the finish line. Many people are scared to have conversations, but conversations equal cash. Every call, message, or real conversation about your business counts. If you're not sure how to move through this fear, bring it to a Momentum Call.",
       },
       3: {
         red: "Out of sight is out of mind. A simple Notion chart, or if you'd like — a pipeline in GHL — with basic stages is enough to start. Build it before your next conversation. Bring your setup to a Momentum Call if you want eyes on it. Having a system like this is the key to remembering where you left off with leads and picking back up when the time is right.",
@@ -61,6 +61,16 @@ export const COACHING: Record<TierId, TierCoaching> = {
         red: "Ending a conversation without asking is the most expensive habit in your business. Follow the Collaborative Close process at the end of every call and every follow-up message. If you haven't learned it yet, that's your first stop. Make sure you're recording every conversation so you can get feedback on it with our agent.",
         yellow:
           "Backing off when you feel resistance is costing you clients who actually want to say yes. Resistance is a question in disguise — stay in the conversation and follow the Collaborative Close process through. Make sure that recording happens. That's the best way to know how you're doing.",
+      },
+      7: {
+        red: "You can't build confidence in your offer without delivering it. Book your first beta client this week — someone from your outreach list who said yes or showed interest. Then deliver using the LEAP Method exactly as taught in Fractional Freedom. Three delivered betas is your proof of concept and the foundation everything else is built on.",
+        yellow:
+          "You're partway there — keep going. Don't stop at one or two. Each delivery makes the next one faster and better, and the goal is three so you have enough evidence that your process works. Bring your delivery experience to a Momentum Call so we can help you tighten it up.",
+      },
+      8: {
+        red: "Beta pricing was for learning. Full price is for business. If you've delivered to your betas, you've earned the right to charge full price. The next three clients pay in full. Bring any hesitation about pricing to a Momentum Call — this is one of the most common places people get stuck, and we can help.",
+        yellow:
+          "You've done it at least once — now make it the standard. Full price isn't just about the revenue, it's about signaling to yourself and your clients that this is a real business. Three full-price clients is the Tier 1 finish line.",
       },
     },
   },
@@ -159,23 +169,29 @@ export const COACHING: Record<TierId, TierCoaching> = {
   },
 };
 
-export function getScorePattern(ratings: Record<number, RatingColor>): ScorePattern {
+export function getScorePattern(
+  ratings: Record<number, RatingColor>,
+  total: number
+): ScorePattern {
   const vals = Object.values(ratings);
-  if (vals.length < 6) return "incomplete";
+  if (vals.length < total) return "incomplete";
   const g = vals.filter((v) => v === "green").length;
   const y = vals.filter((v) => v === "yellow").length;
-  if (g === 6) return "all_green";
+  if (g === total) return "all_green";
   if (g === 0) return "all_red";
-  if (g >= 4) return "mostly_green";
-  if (g + y >= 3) return "mixed";
+  if (g >= Math.ceil(total * 0.67)) return "mostly_green";
+  if (g + y >= Math.ceil(total * 0.5)) return "mixed";
   return "mostly_red";
 }
 
-export function getFirstPriorityActivity(ratings: Record<number, RatingColor>): number | null {
-  for (let i = 1; i <= 6; i++) {
+export function getFirstPriorityActivity(
+  ratings: Record<number, RatingColor>,
+  total: number
+): number | null {
+  for (let i = 1; i <= total; i++) {
     if (ratings[i] === "red") return i;
   }
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 1; i <= total; i++) {
     if (ratings[i] === "yellow") return i;
   }
   return null;

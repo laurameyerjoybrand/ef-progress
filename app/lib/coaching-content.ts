@@ -151,9 +151,9 @@ export const COACHING: Record<TierId, TierCoaching> = {
           "Unpredictable inbound means your content or automation is working sometimes but not systematically. If you don't have ManyChat set up yet, that's the first move. If you have it but aren't hitting 10 warm leads a week, something in your funnel needs diagnosing. Bring your current lead sources to a coaching call and we'll find the gap.",
       },
       2: {
-        red: "One-to-one delivery has a revenue ceiling and you've probably hit it. The one-to-many offer is how you break through. If you don't have one yet, that's the work. You'll find how to do this inside of Expert Offer Mastery. Bring your ideas to a call with Laura and we'll help you design the right offer for where you are.",
+        red: "Custom delivery for every client has a ceiling, and you've probably hit it. A productized offer with a preset curriculum changes the equation: you can serve it one-to-one or one-to-many without rebuilding your process every time. If you don't have one yet, that's the work. You'll find how to design it inside of Expert Offer Mastery. Bring your ideas to a call with Laura and we'll help you build the right offer for where you are.",
         yellow:
-          "A group offer in development that isn't generating revenue isn't an offer yet. It's a side project. Set a launch date, put people in it, and let the first version be imperfect. Done will teach you more than planned ever will.",
+          "A productized offer in development that isn't generating revenue isn't an offer yet. It's a side project. Set a launch date, put people in it, and let the first version be imperfect. Done will teach you more than planned ever will.",
       },
       3: {
         red: "Workshops are one of the fastest ways to build trust with a room full of people at once. If this isn't part of your strategy yet, it should be. Start with one: a 60-minute live session on the problem you solve best. Bring your topic idea to a Momentum Call and we'll pressure-test it.",

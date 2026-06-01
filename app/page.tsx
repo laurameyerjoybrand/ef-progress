@@ -269,12 +269,12 @@ const TIERS: TierData[] = [
       },
       {
         id: 2,
-        name: "One-to-Many Offer",
-        subtitle: "Active group program, workshop, or curriculum-based offer",
+        name: "Productized Offer",
+        subtitle: "A productized, ready-to-sell offer that you can serve either one-to-one or one-to-many based on a preset curriculum",
         detail: {
-          red: "No group offer exists. Still 100% one-to-one delivery.",
-          yellow: "Developing a group offer but it's not live or generating revenue yet.",
-          green: "Active one-to-many offer generating consistent revenue.",
+          red: "No productized offer exists yet. Still building custom delivery for every client.",
+          yellow: "Offer is being developed but isn't finalized, live, or generating revenue yet.",
+          green: "Productized offer is live, clearly defined, and generating consistent revenue.",
         },
       },
       {

@@ -90,33 +90,38 @@ export const COACHING: Record<TierId, TierCoaching> = {
     },
     activities: {
       1: {
-        red: "Doing everything yourself is not a badge of honor at this stage. It's a ceiling. You will not get to $30K by adding more to your plate. The first hire doesn't have to be full-time or expensive. A VA, a contractor, a part-time admin, even a Claude EA (as found in the asset library). Bring what you need off your plate to a Momentum Call and we'll help you figure out what to delegate first.",
-        yellow:
-          "Delegation is a skill and it takes practice. You'll find details on who to hire and when inside of Operation Delegation.",
-      },
-      2: {
         red: "Content is how people find you when you're not in the room. Pick one platform, show up daily using the systems in Expert Content OS, and don't switch until you have momentum. If you're not sure what to post, bring it to a Momentum Call or drop ideas in the community.",
         yellow:
           "Posting occasionally is actually harder than posting consistently because you're always starting from zero. Batch your content weekly using the Expert Content OS systems. The community is a great place to share what you're creating and get feedback.",
       },
-      3: {
+      2: {
         red: "Your email list is the one audience you actually own. Your social following can disappear overnight. If you don't have a list yet, starting one is your first move. If you have one but aren't emailing it, you're leaving relationship and revenue on the table. Learn how to set up your email system and send weekly emails using Expert Growth OS.",
         yellow:
           "Emailing inconsistently teaches your list to ignore you. Pick a cadence, build two weeks of emails in advance so you're never scrambling, and protect it like a client commitment.",
       },
-      4: {
-        red: "If your clients are paying for your thinking and you're giving them your time, you've created a job, not a business. At Grow, the shift is from any doing you're still hanging on to into guiding. You advise, they execute. Make sure you're following the Leap Method exactly the way that we teach it inside of Fractional Freedom.",
-        yellow: `Crossing back into implementation "just this once" is a habit in disguise. Every time you do the work for a client, you train them to expect it and train yourself to avoid the boundary. Hold the line. If this is something you struggle with, the Influencing Change training inside of Fractional Freedom will help you.`,
-      },
-      5: {
+      3: {
         red: `Happy clients who don't refer you are a missed opportunity, and most of the time it's because you never asked. A simple ask is enough: "If you know someone who could use this, I'd love an introduction." Bring it to a Momentum Call if you want help scripting it.`,
         yellow:
           "Asking once and hoping isn't a system. It's a wish. Build the ask into a specific moment in your client journey (usually after a win) so it happens every time without you having to remember. Also, always make sure that you get testimonials immediately after a win as well, so you can use those to market your business.",
       },
-      6: {
+      4: {
         red: "Feast-or-famine at this stage usually means one thing: you stop selling when you get busy with delivery. Your pipeline has to keep moving even when you're full. Five sales calls a month is still your target, even when you're totally booked up.",
         yellow:
           "Good months masking bad months is a dangerous pattern. Look at your last three months. If there's a swing of more than 30%, you have a consistency problem, not a revenue problem. Bring that pattern to a Momentum Call and let's diagnose it.",
+      },
+      5: {
+        red: "You can't manage what you don't measure. At Grow stage, four numbers tell you exactly where your business is healthy and where it's leaking: leads entering your pipeline each month, discovery calls booked, your close rate, and lifetime client value. Set up a simple weekly tracker this week. The 15 minutes you spend reviewing these each Monday will save you hours of guesswork.",
+        yellow:
+          "Partial tracking still leaves you flying blind on the gaps. All four numbers need to be on your weekly dashboard: leads, discovery calls booked, close rate, and LTV. The ones you're not watching are usually the ones hiding your biggest opportunity. Bring your current metrics to a Momentum Call and we'll figure out what they're telling you.",
+      },
+      6: {
+        red: "Doing everything yourself is not a badge of honor at this stage. It's a ceiling. You will not get to $30K by adding more to your plate. The first hire doesn't have to be full-time or expensive. A VA, a contractor, a part-time admin, even a Claude EA (as found in the asset library). Bring what you need off your plate to a Momentum Call and we'll help you figure out what to delegate first.",
+        yellow:
+          "Delegation is a skill and it takes practice. You'll find details on who to hire and when inside of Operation Delegation.",
+      },
+      7: {
+        red: "If your clients are paying for your thinking and you're giving them your time, you've created a job, not a business. At Grow, the shift is from any doing you're still hanging on to into guiding. You advise, they execute. Make sure you're following the Leap Method exactly the way that we teach it inside of Fractional Freedom.",
+        yellow: `Crossing back into implementation "just this once" is a habit in disguise. Every time you do the work for a client, you train them to expect it and train yourself to avoid the boundary. Hold the line. If this is something you struggle with, the Influencing Change training inside of Fractional Freedom will help you.`,
       },
     },
   },
@@ -136,34 +141,44 @@ export const COACHING: Record<TierId, TierCoaching> = {
     },
     activities: {
       1: {
+        red: "If every client still comes from you reaching out, you're working harder than you need to at this stage. Inbound is built through consistent content, clear positioning, and automation. A ManyChat sequence connected to your content is one of the fastest ways to turn engagement into warm leads without adding to your workload. Start with Expert Content OS and bring your setup idea to a coaching call with Laura.",
+        yellow:
+          "Unpredictable inbound means your content or automation is working sometimes but not systematically. If you don't have ManyChat set up yet, that's the first move. If you have it but aren't hitting 10 warm leads a week, something in your funnel needs diagnosing. Bring your current lead sources to a coaching call and we'll find the gap.",
+      },
+      2: {
         red: "One-to-one delivery has a revenue ceiling and you've probably hit it. The one-to-many offer is how you break through. If you don't have one yet, that's the work. You'll find how to do this inside of Expert Offer Mastery. Bring your ideas to a call with Laura and we'll help you design the right offer for where you are.",
         yellow:
           "A group offer in development that isn't generating revenue isn't an offer yet. It's a side project. Set a launch date, put people in it, and let the first version be imperfect. Done will teach you more than planned ever will.",
       },
-      2: {
+      3: {
         red: "Workshops are one of the fastest ways to build trust with a room full of people at once. If this isn't part of your strategy yet, it should be. Start with one: a 60-minute live session on the problem you solve best. Bring your topic idea to a Momentum Call and we'll pressure-test it.",
         yellow:
           "The magic of workshops is in the repetition. Attendees who didn't convert the first time often do the second or third. Build it into your quarterly rhythm.",
       },
-      3: {
+      4: {
         red: "Leads going cold is a systems problem, not a people problem. You need a sequence that stays in touch with prospects automatically: email, content, and follow-up, so no one falls through the gaps. Use Expert Growth OS to build this out if you haven't already.",
         yellow:
           "A partial system that leaks leads is almost worse than no system. It gives you the illusion of follow-up without the result. Map every lead path and make sure each one ends somewhere. Bring it to a coaching call with Laura if you want a second set of eyes.",
       },
-      4: {
-        red: "If you're still the bottleneck for everything, your growth is capped at your personal capacity. Operation Delegation inside the program will help you identify who to hire next and what to hand off first. But if you're working more than 30 hours a week, this is an important place to look.",
-        yellow:
-          "Having help and still being in everything is the most common trap at Scale. The goal isn't to have a team. It's to have a team that actually frees you. If you're still pulled into things others should own, bring that to a call with Laura. We'll help you let go of the right things.",
-      },
       5: {
+        red: "A group offer without a sales system is a side project, not a revenue stream. You need a clear, repeatable path from lead to enrolled client that doesn't require you to personally chase each person. Whether it's a workshop-to-close sequence, an application funnel, or a challenge, this is the infrastructure that makes one-to-many viable. Bring your offer to a coaching call with Laura and we'll map the right system for where you are.",
+        yellow:
+          "A partial sales system will give you inconsistent results. The goal is a complete path: someone discovers you, gets nurtured, and gets invited to enroll, without you manually managing every step. Identify which part of your funnel is leaking and bring it to your next coaching call so we can close the gap.",
+      },
+      6: {
         red: "The challenge with a high-ticket, low-volume business is that if one client leaves, it's a significant reduction in revenue. This stage is an important place to start diversifying your revenue streams. Start with what your audience is already asking for.",
         yellow:
           "An inconsistent second stream is a signal, not a failure. It means the offer has potential but the delivery or marketing isn't dialed in yet. Bring it to a call with Laura and let's figure out which one it is.",
       },
-      6: {
-        red: "If every client still comes from you reaching out, you're working harder than you need to. Inbound is built through consistent content, clear positioning, and showing up as the authority in your space. Expert Content OS is your starting point.",
+      7: {
+        red: "If you're still the bottleneck for everything, your growth is capped at your personal capacity. Operation Delegation inside the program will help you identify who to hire next and what to hand off first. But if you're working more than 30 hours a week, this is an important place to look.",
         yellow:
-          "Unpredictable inbound means your content is working sometimes but not systematically. Look at what's actually driving leads and do more of that. The community is a great place to share what's landing and get feedback. At this stage, it's important not to be the best-kept secret around.",
+          "Having help and still being in everything is the most common trap at Scale. The goal isn't to have a team. It's to have a team that actually frees you. If you're still pulled into things others should own, bring that to a call with Laura. We'll help you let go of the right things.",
+      },
+      8: {
+        red: "If you're still personally managing scheduling, inbox triage, document prep, or other administrative tasks, your highest-value hours are going to your lowest-value work. This is one of the most common traps at Scale: you've built a team but haven't fully stepped out of the day-to-day. Operation Delegation inside the program will help you identify what to hand off next. Bring your current weekly schedule to a call with Laura so we can see exactly where your time is being absorbed.",
+        yellow:
+          "You've started offloading admin but haven't fully stepped out. Every hour you reclaim from coordination and logistics is an hour you can reinvest in revenue, relationships, and strategy. Make a list of the tasks you still own that someone else could handle and bring it to your next coaching call. Five hours a week on admin is the target.",
       },
     },
   },

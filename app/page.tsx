@@ -152,22 +152,17 @@ const TIERS: TierData[] = [
     badge: "Tier 2",
     name: "GROW",
     range: "$10K — $30K / Month",
-    pillars: ["Stabilize", "Systematize", "Breathe"],
+    pillars: ["Attract", "Convert", "Deliver"],
     headerClass: "grow",
     summaryTitle: "Your Progress Snapshot — Tier 2",
+    stages: [
+      { label: "attract", activityIds: [1, 2, 3] },
+      { label: "convert", activityIds: [4, 5] },
+      { label: "deliver", activityIds: [6, 7] },
+    ],
     activities: [
       {
         id: 1,
-        name: "Hiring Support",
-        subtitle: "At least one person helping with admin, delivery, or operations",
-        detail: {
-          red: "Doing everything myself. Stuck in the bottleneck.",
-          yellow: "Thinking about it or made a hire but not effectively delegating yet.",
-          green: "I have support and it is genuinely freeing up my time.",
-        },
-      },
-      {
-        id: 2,
         name: "Content on One Platform",
         subtitle: "Posting consistently on LinkedIn or Instagram (minimum 3x/week)",
         detail: {
@@ -177,7 +172,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 3,
+        id: 2,
         name: "Email System Active",
         subtitle: "List + nurture sequence, emailing at least 2x per month",
         detail: {
@@ -187,17 +182,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 4,
-        name: "Delivery Reduction",
-        subtitle: "Shifting from implementation to advisory — protecting time",
-        detail: {
-          red: "Still doing too much implementation work. Time is consumed by delivery.",
-          yellow: "Started pulling back but still crossing the line into doing the work.",
-          green: "Delivery is advisory-only. I guide, clients execute. Time is protected.",
-        },
-      },
-      {
-        id: 5,
+        id: 3,
         name: "Referral System",
         subtitle: "Consistently asking happy clients for referrals and introductions",
         detail: {
@@ -207,13 +192,43 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 6,
+        id: 4,
         name: "Revenue Consistency",
         subtitle: "Income is predictable and trending toward $30K/month",
         detail: {
           red: "Very inconsistent. Can't project income more than a month out.",
           yellow: "Some months are great, others drop. Feast-or-famine is still real.",
           green: "Hitting $10K+ consistently. Revenue is predictable and growing.",
+        },
+      },
+      {
+        id: 5,
+        name: "Weekly Metrics Tracking",
+        subtitle: "Monitoring leads, discovery calls booked, close rate, and client LTV every week",
+        detail: {
+          red: "Key business metrics aren't being tracked. Decisions are based on gut feeling rather than data.",
+          yellow: "Tracking some metrics but not all four consistently. Missing numbers are hiding your biggest opportunities.",
+          green: "All four metrics tracked weekly: leads, calls booked, close rate, and LTV. Decisions are data-driven.",
+        },
+      },
+      {
+        id: 6,
+        name: "Hiring Support",
+        subtitle: "At least one person helping with admin, delivery, or operations",
+        detail: {
+          red: "Doing everything myself. Stuck in the bottleneck.",
+          yellow: "Thinking about it or made a hire but not effectively delegating yet.",
+          green: "I have support and it is genuinely freeing up my time.",
+        },
+      },
+      {
+        id: 7,
+        name: "Delivery Reduction",
+        subtitle: "Shifting from implementation to advisory, protecting time",
+        detail: {
+          red: "Still doing too much implementation work. Time is consumed by delivery.",
+          yellow: "Started pulling back but still crossing the line into doing the work.",
+          green: "Delivery is advisory-only. I guide, clients execute. Time is protected.",
         },
       },
     ],
@@ -223,12 +238,27 @@ const TIERS: TierData[] = [
     badge: "Tier 3",
     name: "SCALE",
     range: "$30K+ / Month",
-    pillars: ["Leverage", "Multiply", "Lead"],
+    pillars: ["Attract", "Convert", "Deliver"],
     headerClass: "scale",
     summaryTitle: "Your Progress Snapshot — Tier 3",
+    stages: [
+      { label: "attract", activityIds: [1, 2, 3, 4] },
+      { label: "convert", activityIds: [5] },
+      { label: "deliver", activityIds: [6, 7, 8] },
+    ],
     activities: [
       {
         id: 1,
+        name: "Inbound Authority",
+        subtitle: "Content and brand driving 10+ warm leads per week through ManyChat or platform automations",
+        detail: {
+          red: "No inbound system in place. No ManyChat or automation running. Still relying entirely on outreach to find clients.",
+          yellow: "Some inbound but no consistent automation. Not yet hitting 10 warm leads per week.",
+          green: "ManyChat or automations running consistently. 10+ warm leads per week coming in without manual outreach.",
+        },
+      },
+      {
+        id: 2,
         name: "One-to-Many Offer",
         subtitle: "Active group program, workshop, or curriculum-based offer",
         detail: {
@@ -238,7 +268,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 2,
+        id: 3,
         name: "Hosting Workshops & Events",
         subtitle: "Live events that both deliver value and convert attendees",
         detail: {
@@ -248,7 +278,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 3,
+        id: 4,
         name: "Lead Nurture System",
         subtitle: "Email, content, and follow-up sequences working leads over time",
         detail: {
@@ -258,17 +288,17 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 4,
-        name: "Team & Delegation",
-        subtitle: "Right people handling operations, delivery, and/or sales",
+        id: 5,
+        name: "One-to-Many Sales System",
+        subtitle: "Repeatable enrollment process for your group or leveraged offer",
         detail: {
-          red: "Still the bottleneck for everything. Growth is capped by my capacity.",
-          yellow: "Have some help but still too involved in things others should own.",
-          green: "Functioning team in place. I'm working on the business, not in it.",
+          red: "No sales system for your group offer. Enrollment relies entirely on manual outreach.",
+          yellow: "Some sales system elements exist but the path from lead to enrolled client isn't complete or consistent.",
+          green: "A repeatable path from lead to enrolled client runs without manual chasing. Group offer fills itself.",
         },
       },
       {
-        id: 5,
+        id: 6,
         name: "Revenue Diversification",
         subtitle: "2+ income streams contributing meaningfully to monthly revenue",
         detail: {
@@ -278,13 +308,23 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 6,
-        name: "Inbound Authority",
-        subtitle: "Content and brand generating consistent inbound leads and opportunities",
+        id: 7,
+        name: "Team & Delegation",
+        subtitle: "Right people handling operations, delivery, and/or sales",
         detail: {
-          red: "Brand isn't generating inbound. Still relying entirely on outreach.",
-          yellow: "Occasional inbound but it's unpredictable. Can't rely on it.",
-          green: "Consistent inbound from content and brand. Leads come to me.",
+          red: "Still the bottleneck for everything. Growth is capped by my capacity.",
+          yellow: "Have some help but still too involved in things others should own.",
+          green: "Functioning team in place. I'm working on the business, not in it.",
+        },
+      },
+      {
+        id: 8,
+        name: "Administrative Time Reduction",
+        subtitle: "Fewer than 5 hours per week spent on admin, scheduling, or non-revenue work",
+        detail: {
+          red: "Spending too much time on admin tasks. CEO-level hours are going to low-value work.",
+          yellow: "Some admin delegated but still regularly pulled into scheduling, coordination, or operations.",
+          green: "Under 5 hours per week on admin. Time is protected for revenue, leadership, and high-value work.",
         },
       },
     ],

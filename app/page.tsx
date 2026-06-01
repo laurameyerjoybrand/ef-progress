@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Fragment } from "react";
 import {
   COACHING,
   getScorePattern,
@@ -30,6 +30,11 @@ interface Activity {
   detail: ActivityDetail;
 }
 
+interface TierStage {
+  label: string;
+  activityIds: number[];
+}
+
 interface TierData {
   id: TierId;
   badge: string;
@@ -39,6 +44,7 @@ interface TierData {
   headerClass: string;
   activities: Activity[];
   summaryTitle: string;
+  stages?: TierStage[];
 }
 
 // ─── Tier Data ────────────────────────────────────────────────────────────────
@@ -52,6 +58,11 @@ const TIERS: TierData[] = [
     pillars: ["Attract", "Convert", "Deliver"],
     headerClass: "launch",
     summaryTitle: "Your Progress Snapshot — Tier 1",
+    stages: [
+      { label: "attract", activityIds: [1, 2, 3, 4] },
+      { label: "convert", activityIds: [5, 6] },
+      { label: "deliver", activityIds: [7, 8] },
+    ],
     activities: [
       {
         id: 1,
@@ -282,6 +293,12 @@ const TIERS: TierData[] = [
 
 const getTierTotal = (tierId: TierId) =>
   TIERS.find((t) => t.id === tierId)!.activities.length;
+
+const getActivityStage = (tier: TierData, actId: number): string | null => {
+  if (!tier.stages) return null;
+  const group = tier.stages.find((g) => g.activityIds.includes(actId));
+  return group?.label ?? null;
+};
 
 const CTAS: Record<string, string> = {
   all_green: "You're firing on all cylinders. Are you ready to move to the next tier?",
@@ -676,12 +693,23 @@ export default function ProgressCharts() {
                 {tier.name.charAt(0) + tier.name.slice(1).toLowerCase()} Activities — Rate Each One
               </div>
 
-              {tier.activities.map((act) => {
+              {tier.activities.map((act, idx) => {
                 const detailKey = `${tier.id}-${act.id}`;
                 const isOpen = !!openDetails[detailKey];
+                const currentStage = getActivityStage(tier, act.id);
+                const prevStage = idx > 0 ? getActivityStage(tier, tier.activities[idx - 1].id) : null;
+                const showDivider = currentStage !== null && currentStage !== prevStage;
 
                 return (
-                  <div key={act.id} className="pc-activity-card">
+                  <Fragment key={act.id}>
+                  {showDivider && (
+                    <div className={`pc-stage-divider stage-${currentStage}`}>
+                      <span className="pc-stage-divider-label">
+                        {currentStage!.charAt(0).toUpperCase() + currentStage!.slice(1)}
+                      </span>
+                    </div>
+                  )}
+                  <div className="pc-activity-card">
                     <div
                       className="pc-activity-header"
                       onClick={() => handleToggleDetail(detailKey)}
@@ -722,6 +750,7 @@ export default function ProgressCharts() {
                       </div>
                     )}
                   </div>
+                  </Fragment>
                 );
               })}
 

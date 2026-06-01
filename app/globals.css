@@ -782,6 +782,43 @@ body {
   text-align: center;
 }
 
+/* ── STAGE DIVIDERS ── */
+
+.pc-stage-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 20px 2px;
+}
+
+.pc-stage-divider::before,
+.pc-stage-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+
+.pc-stage-divider-label {
+  font-family: 'Karla', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stage-attract::before,
+.stage-attract::after { background: rgba(91, 107, 168, 0.28); }
+.stage-attract .pc-stage-divider-label { color: #5B6BAA; }
+
+.stage-convert::before,
+.stage-convert::after { background: rgba(200, 168, 130, 0.55); }
+.stage-convert .pc-stage-divider-label { color: #8A6838; }
+
+.stage-deliver::before,
+.stage-deliver::after { background: rgba(74, 124, 89, 0.28); }
+.stage-deliver .pc-stage-divider-label { color: #3A6B4A; }
+
 /* ── RESPONSIVE ── */
 
 @media (max-width: 700px) {

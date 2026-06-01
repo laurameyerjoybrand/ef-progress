@@ -166,9 +166,9 @@ export const COACHING: Record<TierId, TierCoaching> = {
           "A partial system that leaks leads is almost worse than no system. It gives you the illusion of follow-up without the result. Map every lead path and make sure each one ends somewhere. Bring it to a coaching call with Laura if you want a second set of eyes.",
       },
       5: {
-        red: "A group offer without a sales system is a side project, not a revenue stream. You need a clear, repeatable path from lead to enrolled client that doesn't require you to personally chase each person. Whether it's a workshop-to-close sequence, an application funnel, or a challenge, this is the infrastructure that makes one-to-many viable. Bring your offer to a coaching call with Laura and we'll map the right system for where you are.",
+        red: "A group offer without a sales system will leave you stuck delivering one-on-one services at group rates. You need a clear, repeatable path from lead to enrolled client that doesn't require you to personally chase each person. Whether it's a workshop-to-close sequence, an application funnel, or a challenge, this is the infrastructure that makes one-to-many viable. Bring your offer to a coaching call with Laura and we'll map the right system for where you are.",
         yellow:
-          "A partial sales system will give you inconsistent results. The goal is a complete path: someone discovers you, gets nurtured, and gets invited to enroll, without you manually managing every step. Identify which part of your funnel is leaking and bring it to your next coaching call so we can close the gap.",
+          "A partial sales system will give you inconsistent results and risks leaving you stuck delivering one-on-one services at group rates. The goal is a complete path: someone discovers you, gets nurtured, and gets invited to enroll, without you manually managing every step. Identify which part of your funnel is leaking and bring it to your next coaching call so we can close the gap.",
       },
       6: {
         red: "The challenge with a high-ticket, low-volume business is that if one client leaves, it's a significant reduction in revenue. This stage is an important place to start diversifying your revenue streams. Start with what your audience is already asking for.",
@@ -183,7 +183,7 @@ export const COACHING: Record<TierId, TierCoaching> = {
       8: {
         red: "If you're still personally managing scheduling, inbox triage, document prep, or other administrative tasks, your highest-value hours are going to your lowest-value work. This is one of the most common traps at Scale: you've built a team but haven't fully stepped out of the day-to-day. Operation Delegation inside the program will help you identify what to hand off next. Bring your current weekly schedule to a call with Laura so we can see exactly where your time is being absorbed.",
         yellow:
-          "You've started offloading admin but haven't fully stepped out. Every hour you reclaim from coordination and logistics is an hour you can reinvest in revenue, relationships, and strategy. Make a list of the tasks you still own that someone else could handle and bring it to your next coaching call. Five hours a week on admin is the target.",
+          "You've started offloading admin but haven't fully stepped out. Every hour you reclaim from coordination and logistics is an hour you can reinvest in revenue, relationships, and strategy. Make a list of the tasks you still own that someone else could handle and bring it to your next coaching call. 2-3 hours a week on admin is the target.",
       },
     },
   },

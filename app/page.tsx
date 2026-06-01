@@ -743,30 +743,27 @@ export default function ProgressCharts() {
                 {tier.name.charAt(0) + tier.name.slice(1).toLowerCase()} Activities — Rate Each One
               </div>
 
-              {tier.activities.map((act, idx) => {
+              {tier.activities.map((act) => {
                 const detailKey = `${tier.id}-${act.id}`;
                 const isOpen = !!openDetails[detailKey];
                 const currentStage = getActivityStage(tier, act.id);
-                const prevStage = idx > 0 ? getActivityStage(tier, tier.activities[idx - 1].id) : null;
-                const showDivider = currentStage !== null && currentStage !== prevStage;
 
                 return (
-                  <Fragment key={act.id}>
-                  {showDivider && (
-                    <div className={`pc-stage-divider stage-${currentStage}`}>
-                      <span className="pc-stage-divider-label">
-                        {currentStage!.charAt(0).toUpperCase() + currentStage!.slice(1)}
-                      </span>
-                    </div>
-                  )}
-                  <div className="pc-activity-card">
+                  <div key={act.id} className="pc-activity-card">
                     <div
                       className="pc-activity-header"
                       onClick={() => handleToggleDetail(detailKey)}
                     >
                       <div className="pc-activity-number">{String(act.id).padStart(2, "0")}</div>
                       <div className="pc-activity-info">
-                        <div className="pc-activity-name">{act.name}</div>
+                        <div className="pc-activity-name-row">
+                          <span className="pc-activity-name">{act.name}</span>
+                          {currentStage && (
+                            <span className={`pc-stage-pill stage-${currentStage}`}>
+                              {currentStage.charAt(0).toUpperCase() + currentStage.slice(1)}
+                            </span>
+                          )}
+                        </div>
                         <div className="pc-activity-subtitle">{act.subtitle}</div>
                       </div>
                       <div className="pc-rating-pills">
@@ -800,7 +797,6 @@ export default function ProgressCharts() {
                       </div>
                     )}
                   </div>
-                  </Fragment>
                 );
               })}
 

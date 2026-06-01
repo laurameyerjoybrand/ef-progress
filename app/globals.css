@@ -782,42 +782,31 @@ body {
   text-align: center;
 }
 
-/* ── STAGE DIVIDERS ── */
+/* ── STAGE PILLS ── */
 
-.pc-stage-divider {
+.pc-activity-name-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 20px 20px 2px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.pc-stage-divider::before,
-.pc-stage-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-}
-
-.pc-stage-divider-label {
+.pc-stage-pill {
   font-family: 'Karla', sans-serif;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  line-height: 1.6;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.stage-attract::before,
-.stage-attract::after { background: rgba(91, 107, 168, 0.28); }
-.stage-attract .pc-stage-divider-label { color: #5B6BAA; }
-
-.stage-convert::before,
-.stage-convert::after { background: rgba(200, 168, 130, 0.55); }
-.stage-convert .pc-stage-divider-label { color: #8A6838; }
-
-.stage-deliver::before,
-.stage-deliver::after { background: rgba(74, 124, 89, 0.28); }
-.stage-deliver .pc-stage-divider-label { color: #3A6B4A; }
+.stage-attract { background: rgba(91, 107, 168, 0.12); color: #5B6BAA; }
+.stage-convert { background: rgba(200, 168, 130, 0.45); color: #8A6838; }
+.stage-deliver { background: rgba(74, 124, 89, 0.12); color: #3A6B4A; }
 
 /* ── RESPONSIVE ── */
 

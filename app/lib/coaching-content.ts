@@ -82,7 +82,7 @@ export const COACHING: Record<TierId, TierCoaching> = {
       mostly_red:
         "You have proof that some of this works. Now the job is to stop doing everything manually and start building the systems that let your business run without you in every piece of it. Bring your biggest time drain to a Momentum Call and let's figure out what to hand off first.",
       mixed:
-        "You've built some structure and it's showing. But the gaps are real, and at this stage, gaps become bottlenecks fast. The things still in red are probably the ones you keep pushing off because they feel complex. They're not. They just need attention. Which one is costing you the most right now?",
+        "You've built some structure and it's showing. But the gaps are real, and at this stage, gaps become bottlenecks fast. The things still in red are probably the ones you keep pushing off because they feel complex. They're not - things can still be simple. They just need attention. Which one is costing you the most right now?",
       mostly_green:
         "You are close to cracking the code on Grow. Your foundation is solid. Now it's about closing the last few gaps so your revenue becomes truly predictable. Don't let almost get in the way of done.",
       all_green:

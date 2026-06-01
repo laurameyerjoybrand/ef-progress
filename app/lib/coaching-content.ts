@@ -105,21 +105,26 @@ export const COACHING: Record<TierId, TierCoaching> = {
           "Asking once and hoping isn't a system. It's a wish. Build the ask into a specific moment in your client journey (usually after a win) so it happens every time without you having to remember. Also, always make sure that you get testimonials immediately after a win as well, so you can use those to market your business.",
       },
       4: {
+        red: "Your brand deck is the foundation that makes everything else consistent. Without it, every piece of content and every team member is working from a different version of who you are. Complete it, install it into your Claude project, and make sure anyone who touches your brand has a copy. This is a one-time investment that pays off every time you create content or bring someone new onto your team.",
+        yellow:
+          "A brand deck sitting in a folder isn't working for you. Install it into your Claude project so it informs every piece of content you create, and make sure every key team member has it. Once it's active and shared, it does the work without you having to repeat yourself.",
+      },
+      5: {
         red: "Feast-or-famine at this stage usually means one thing: you stop selling when you get busy with delivery. Your pipeline has to keep moving even when you're full. Five sales calls a month is still your target, even when you're totally booked up.",
         yellow:
           "Good months masking bad months is a dangerous pattern. Look at your last three months. If there's a swing of more than 30%, you have a consistency problem, not a revenue problem. Bring that pattern to a Momentum Call and let's diagnose it.",
       },
-      5: {
+      6: {
         red: "You can't manage what you don't measure. At Grow stage, four numbers tell you exactly where your business is healthy and where it's leaking: leads entering your pipeline each month, discovery calls booked, your close rate, and lifetime client value. Set up a simple weekly tracker this week. The 15 minutes you spend reviewing these each Monday will save you hours of guesswork.",
         yellow:
           "Partial tracking still leaves you flying blind on the gaps. All four numbers need to be on your weekly dashboard: leads, discovery calls booked, close rate, and LTV. The ones you're not watching are usually the ones hiding your biggest opportunity. Bring your current metrics to a Momentum Call and we'll figure out what they're telling you.",
       },
-      6: {
+      7: {
         red: "Doing everything yourself is not a badge of honor at this stage. It's a ceiling. You will not get to $30K by adding more to your plate. The first hire doesn't have to be full-time or expensive. A VA, a contractor, a part-time admin, even a Claude EA (as found in the asset library). Bring what you need off your plate to a Momentum Call and we'll help you figure out what to delegate first.",
         yellow:
           "Delegation is a skill and it takes practice. You'll find details on who to hire and when inside of Operation Delegation.",
       },
-      7: {
+      8: {
         red: "If your clients are paying for your thinking and you're giving them your time, you've created a job, not a business. At Grow, the shift is from any doing you're still hanging on to into guiding. You advise, they execute. Make sure you're following the Leap Method exactly the way that we teach it inside of Fractional Freedom.",
         yellow: `Crossing back into implementation "just this once" is a habit in disguise. Every time you do the work for a client, you train them to expect it and train yourself to avoid the boundary. Hold the line. If this is something you struggle with, the Influencing Change training inside of Fractional Freedom will help you.`,
       },

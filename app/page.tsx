@@ -156,9 +156,9 @@ const TIERS: TierData[] = [
     headerClass: "grow",
     summaryTitle: "Your Progress Snapshot — Tier 2",
     stages: [
-      { label: "attract", activityIds: [1, 2, 3] },
-      { label: "convert", activityIds: [4, 5] },
-      { label: "deliver", activityIds: [6, 7] },
+      { label: "attract", activityIds: [1, 2, 3, 4] },
+      { label: "convert", activityIds: [5, 6] },
+      { label: "deliver", activityIds: [7, 8] },
     ],
     activities: [
       {
@@ -174,7 +174,7 @@ const TIERS: TierData[] = [
       {
         id: 2,
         name: "Email System Active",
-        subtitle: "List + nurture sequence, emailing at least 2x per month",
+        subtitle: "List + nurture sequence, emailing at least weekly",
         detail: {
           red: "No email list or system in place. This hasn't started.",
           yellow: "Have a list but email rarely or have no consistent nurture.",
@@ -193,6 +193,16 @@ const TIERS: TierData[] = [
       },
       {
         id: 4,
+        name: "Brand Deck Complete",
+        subtitle: "Finalized brand deck installed into Claude and distributed to key team members",
+        detail: {
+          red: "Brand deck doesn't exist yet. Content and team communication are inconsistent without a shared foundation.",
+          yellow: "Brand deck exists but hasn't been installed into Claude or shared with the team. It's not being used yet.",
+          green: "Brand deck is complete, installed into Claude, and in the hands of every key team member.",
+        },
+      },
+      {
+        id: 5,
         name: "Revenue Consistency",
         subtitle: "Income is predictable and trending toward $30K/month",
         detail: {
@@ -202,7 +212,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 5,
+        id: 6,
         name: "Weekly Metrics Tracking",
         subtitle: "Monitoring leads, discovery calls booked, close rate, and client LTV every week",
         detail: {
@@ -212,7 +222,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 6,
+        id: 7,
         name: "Hiring Support",
         subtitle: "At least one person helping with admin, delivery, or operations",
         detail: {
@@ -222,7 +232,7 @@ const TIERS: TierData[] = [
         },
       },
       {
-        id: 7,
+        id: 8,
         name: "Delivery Reduction",
         subtitle: "Shifting from implementation to advisory, protecting time",
         detail: {

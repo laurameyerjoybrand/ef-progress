@@ -63,14 +63,14 @@ export const COACHING: Record<TierId, TierCoaching> = {
           "Backing off when you feel resistance is costing you clients who actually want to say yes. Resistance is a question in disguise — stay in the conversation and follow the Collaborative Close process through. Make sure that recording happens. That's the best way to know how you're doing.",
       },
       7: {
-        red: "You can't build confidence in your offer without delivering it. Book your first beta client this week — someone from your outreach list who said yes or showed interest. Then deliver using the LEAP Method exactly as taught in Fractional Freedom. Three delivered betas is your proof of concept and the foundation everything else is built on.",
+        red: "You can't build confidence in your offer without delivering it. Book your first beta client this week — someone from your outreach list who said yes or showed interest. The LEAP Method training inside Expert Freedom will walk you through exactly how to deliver. Three completed betas is your proof of concept.",
         yellow:
-          "You're partway there — keep going. Don't stop at one or two. Each delivery makes the next one faster and better, and the goal is three so you have enough evidence that your process works. Bring your delivery experience to a Momentum Call so we can help you tighten it up.",
+          "You're partway there — keep going. Don't stop at one or two. Each delivery builds your confidence and sharpens your process. Bring your experience to a Momentum Call so we can help you tighten it up before the next one.",
       },
       8: {
-        red: "Beta pricing was for learning. Full price is for business. If you've delivered to your betas, you've earned the right to charge full price. The next three clients pay in full. Bring any hesitation about pricing to a Momentum Call — this is one of the most common places people get stuck, and we can help.",
+        red: "You've done the hard work — now it's time to move from your discounted beta rate to your full price. The next three clients pay at full price. If you're unsure where to set that, bring it to a Momentum Call and we'll help you think it through.",
         yellow:
-          "You've done it at least once — now make it the standard. Full price isn't just about the revenue, it's about signaling to yourself and your clients that this is a real business. Three full-price clients is the Tier 1 finish line.",
+          "You've made the ask at full price at least once — now make it the standard. Three full-price clients is the Tier 1 finish line.",
       },
     },
   },

@@ -78,6 +78,8 @@ export async function POST(request: NextRequest) {
           activity4: (ratings as Record<string, string>)["4"] ?? "",
           activity5: (ratings as Record<string, string>)["5"] ?? "",
           activity6: (ratings as Record<string, string>)["6"] ?? "",
+          activity7: (ratings as Record<string, string>)["7"] ?? "",
+          activity8: (ratings as Record<string, string>)["8"] ?? "",
           allRatings: ratingsFlat,
           notes: notes ?? "",
           oneMove: oneMove ?? "",

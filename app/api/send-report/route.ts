@@ -15,85 +15,73 @@ export async function POST(request: NextRequest) {
       oneMove,
     } = body;
 
-    const results: { email?: string; sheets?: string; error?: string } = {};
+    const endpoint = process.env.SHEETS_WEBHOOK_URL;
+    const secret = process.env.APP_SHARED_SECRET ?? "";
 
-    // ── Email via Resend ──────────────────────────────────────────────────────
-    const resendKey = process.env.RESEND_API_KEY;
-    if (resendKey) {
-      const htmlBody = buildEmailHtml({
-        studentName,
-        tier,
-        tierName,
-        overallMessage,
-        activityNotes,
-        oneMove,
-        notes,
-      });
-
-      const resendRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "Expert Freedom <progress@getexpertfreedom.com>",
-          to: [studentEmail],
-          subject: `Your Expert Freedom Progress Report — ${tierName}`,
-          html: htmlBody,
-        }),
-      });
-
-      if (!resendRes.ok) {
-        const err = await resendRes.json().catch(() => ({}));
-        console.error("Resend error:", err);
-        results.email = "error";
-      } else {
-        results.email = "sent";
-      }
-    } else {
-      console.warn("RESEND_API_KEY not set — skipping email send");
-      results.email = "skipped";
+    if (!endpoint) {
+      console.error("SHEETS_WEBHOOK_URL not set");
+      return Response.json(
+        { error: "Reporting service is not configured yet. Please try again later." },
+        { status: 503 }
+      );
     }
 
-    // ── Google Sheets via Apps Script webhook ─────────────────────────────────
-    const sheetsUrl = process.env.SHEETS_WEBHOOK_URL;
-    if (sheetsUrl) {
-      const ratingsFlat = Object.entries(ratings as Record<string, string>)
-        .sort(([a], [b]) => Number(a) - Number(b))
-        .map(([, v]) => v)
-        .join(", ");
+    const html = buildEmailHtml({
+      studentName,
+      tier,
+      tierName,
+      overallMessage,
+      activityNotes,
+      oneMove,
+      notes,
+    });
 
-      const sheetsRes = await fetch(sheetsUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          name: studentName,
-          email: studentEmail,
-          tier: tierName,
-          activity1: (ratings as Record<string, string>)["1"] ?? "",
-          activity2: (ratings as Record<string, string>)["2"] ?? "",
-          activity3: (ratings as Record<string, string>)["3"] ?? "",
-          activity4: (ratings as Record<string, string>)["4"] ?? "",
-          activity5: (ratings as Record<string, string>)["5"] ?? "",
-          activity6: (ratings as Record<string, string>)["6"] ?? "",
-          activity7: (ratings as Record<string, string>)["7"] ?? "",
-          activity8: (ratings as Record<string, string>)["8"] ?? "",
-          allRatings: ratingsFlat,
-          notes: notes ?? "",
-          oneMove: oneMove ?? "",
-        }),
-      });
+    const r = (ratings ?? {}) as Record<string, string>;
+    const ratingsFlat = Object.entries(r)
+      .sort(([a], [b]) => Number(a) - Number(b))
+      .map(([, v]) => v)
+      .join(", ");
 
-      results.sheets = sheetsRes.ok ? "logged" : "error";
-    } else {
-      console.warn("SHEETS_WEBHOOK_URL not set — skipping Sheets logging");
-      results.sheets = "skipped";
+    // Single backend endpoint (n8n webhook): logs the row to the master sheet
+    // AND sends the branded report email from Expert Freedom <team@joybrandcreative.com>.
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret,
+        to: studentEmail,
+        subject: `Your Expert Freedom Progress Report: ${tierName}`,
+        html,
+        fromName: "Expert Freedom",
+        replyTo: "team@joybrandcreative.com",
+        timestamp: new Date().toISOString(),
+        name: studentName,
+        email: studentEmail,
+        tier: tierName,
+        activity1: r["1"] ?? "",
+        activity2: r["2"] ?? "",
+        activity3: r["3"] ?? "",
+        activity4: r["4"] ?? "",
+        activity5: r["5"] ?? "",
+        activity6: r["6"] ?? "",
+        activity7: r["7"] ?? "",
+        activity8: r["8"] ?? "",
+        allRatings: ratingsFlat,
+        notes: notes ?? "",
+        oneMove: oneMove ?? "",
+      }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.ok === false) {
+      console.error("Backend error:", data);
+      return Response.json(
+        { error: "We couldn't send your report. Please try again." },
+        { status: 502 }
+      );
     }
 
-    // Return success as long as at least email or sheets worked
-    return Response.json({ success: true, results });
+    return Response.json({ success: true, results: data });
   } catch (err) {
     console.error("send-report error:", err);
     return Response.json({ error: "Something went wrong. Please try again." }, { status: 500 });
@@ -199,7 +187,7 @@ function buildEmailHtml(data: EmailData): string {
         <!-- Footer -->
         <tr><td style="background:#ffffff;border-top:1px solid rgba(54,31,54,0.08);border-radius:0 0 12px 12px;padding:20px 36px;text-align:center;">
           <div style="font-size:12px;color:#857479;line-height:1.6;">
-            Expert Freedom &nbsp;·&nbsp; <a href="https://getexpertfreedom.com" style="color:#857479;">getexpertfreedom.com</a>
+            Expert Freedom &nbsp;·&nbsp; <a href="https://getexpertfreedom.com" style="color:#857479;">getexpertfreedom.com</a><br>Questions? Email <a href="mailto:admin@joybrandcreative.com" style="color:#857479;">admin@joybrandcreative.com</a>
           </div>
         </td></tr>
 

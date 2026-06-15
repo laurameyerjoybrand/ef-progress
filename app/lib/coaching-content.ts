@@ -22,11 +22,11 @@ export const COACHING: Record<TierId, TierCoaching> = {
   launch: {
     overall: {
       all_red:
-        "You know exactly where you are, and that's actually the most powerful place to start. Most students who come in with all reds leave with their first client faster than they expect, because nothing else is competing for their attention. Begin with the 30-Day Quick Start, and you'll have tasks complete and a new update for us next time you visit this progress chart.",
+        "You know exactly where you are, and that's the most powerful place to start. Most students who come in with all reds leave with their first client faster than they expect, because nothing else is competing for their attention. Begin with the 30-Day Quick Start, and you'll have tasks complete and a new update for us next time you visit this progress chart.",
       mostly_red:
         "You have glimmers of green, which means you know what it feels like to get something working. Now the job is to take that same energy and apply it to your reds, one at a time. Don't spread across all of them. Find the red that's blocking everything else and make that your only focus. If you're finding it difficult to know what to tackle first or how to go about it, bring that to our Momentum Calls, and we'll get you on track.",
       mixed:
-        "You're in the most common spot because mixed results can feel like progress, but they can also mask the one thing that's quietly stalling you. Look at your reds. Which one, if you fixed it this week, would make the yellows easier? Also, sometimes once we start making progress, we go backwards. Don't let that happen to you. Bring what you're stalling out on to a Momentum Call, and we'll get you back on track.",
+        "You're in the most common spot because mixed results can feel like progress, but they can also mask the one thing that's stalling you. Look at your reds. Which one, if you fixed it this week, would make the yellows easier? Also, sometimes once we start making progress, we go backwards. Don't let that happen to you. Bring what you're stalling out on to a Momentum Call, and we'll get you back on track.",
       mostly_green:
         "You're close! This isn't the time to go back and polish what's already working. Start looking at what needs to be in place for you to get to that next jump in growth. Your reds are the only thing standing between where you are and consistent revenue.",
       all_green:
@@ -60,7 +60,7 @@ export const COACHING: Record<TierId, TierCoaching> = {
       6: {
         red: "Ending a conversation without asking is the most expensive habit in your business. Follow the Collaborative Close process at the end of every call and every follow-up message. If you haven't learned it yet, that's your first stop. Make sure you're recording every conversation so you can get feedback on it with our agent.",
         yellow:
-          "Backing off when you feel resistance is costing you clients who actually want to say yes. Resistance is a question in disguise, so stay in the conversation and follow the Collaborative Close process through. Make sure that recording happens. That's the best way to know how you're doing.",
+          "Backing off when you feel resistance is costing you clients who want to say yes. Resistance is a question in disguise, so stay in the conversation and follow the Collaborative Close process through. Make sure that recording happens. That's the best way to know how you're doing.",
       },
       7: {
         red: "You can't build confidence in your offer without delivering it. Book your first beta client this week, starting with someone from your outreach list who said yes or showed interest. The LEAP Method training inside Expert Freedom will walk you through exactly how to deliver. Three completed betas is your proof of concept.",
@@ -92,10 +92,10 @@ export const COACHING: Record<TierId, TierCoaching> = {
       1: {
         red: "Content is how people find you when you're not in the room. Pick one platform, show up daily using the systems in Expert Content OS, and don't switch until you have momentum. If you're not sure what to post, bring it to a Momentum Call or drop ideas in the community.",
         yellow:
-          "Posting occasionally is actually harder than posting consistently because you're always starting from zero. Batch your content weekly using the Expert Content OS systems. The community is a great place to share what you're creating and get feedback.",
+          "Posting occasionally is harder than posting consistently because you're always starting from zero. Batch your content weekly using the Expert Content OS systems. The community is a great place to share what you're creating and get feedback.",
       },
       2: {
-        red: "Your email list is the one audience you actually own. Your social following can disappear overnight. If you don't have a list yet, starting one is your first move. If you have one but aren't emailing it, you're leaving relationship and revenue on the table. Learn how to set up your email system and send weekly emails using Expert Growth OS.",
+        red: "Your email list is the one audience you own. Your social following can disappear overnight. If you don't have a list yet, starting one is your first move. If you have one but aren't emailing it, you're leaving relationship and revenue on the table. Learn how to set up your email system and send weekly emails using Expert Growth OS.",
         yellow:
           "Emailing inconsistently teaches your list to ignore you. Pick a cadence, build two weeks of emails in advance so you're never scrambling, and protect it like a client commitment.",
       },
@@ -178,7 +178,7 @@ export const COACHING: Record<TierId, TierCoaching> = {
       7: {
         red: "If you're still the bottleneck for everything, your growth is capped at your personal capacity. Operation Delegation inside the program will help you identify who to hire next and what to hand off first. But if you're working more than 30 hours a week, this is an important place to look.",
         yellow:
-          "Having help and still being in everything is the most common trap at Scale. The goal isn't to have a team. It's to have a team that actually frees you. If you're still pulled into things others should own, bring that to a call with Laura. We'll help you let go of the right things.",
+          "Having help and still being in everything is the most common trap at Scale. The goal isn't to have a team. It's to have a team that frees you. If you're still pulled into things others should own, bring that to a call with Laura. We'll help you let go of the right things.",
       },
       8: {
         red: "If you're still personally managing scheduling, inbox triage, document prep, or other administrative tasks, your highest-value hours are going to your lowest-value work. This is one of the most common traps at Scale: you've built a team but haven't fully stepped out of the day-to-day. Operation Delegation inside the program will help you identify what to hand off next. Bring your current weekly schedule to a call with Laura so we can see exactly where your time is being absorbed.",
